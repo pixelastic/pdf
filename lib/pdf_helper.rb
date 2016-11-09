@@ -37,6 +37,7 @@ module PdfHelper
 
   # Extract a specific page or range from one PDF
   def split(input: nil, output: nil, page: nil, range: nil)
+    page = range unless range.nil?
     if output.nil?
       output = input.gsub(/\.pdf$/, "_#{page}.pdf")
     end

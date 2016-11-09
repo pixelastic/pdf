@@ -103,13 +103,29 @@ describe(PdfHelper) do
       expect(t.page_count(actual)).to eq 1
     end
 
-    xit 'should do nothing if the page is out of bounds' do
+    it 'should do nothing if the page is out of bounds' do
+      # Given
+      input = copy(blog)
+      output = File.join(File.dirname(input), 'output.pdf')
+
+      # When
+      actual = t.split(input: input, output: 'output.pdf', page: 99999)
+
+      # Then
+      expect(actual).to eq nil
+      expect(File.exist?(output)).to be false
     end
 
-    xit 'should extract a new pdf of the range defined' do
-    end
+    it 'should extract a new pdf of the range defined' do
+      # Given
+      input = copy(blog)
 
-    xit 'should not fail when an out-of-bound range is defined' do
+      # When
+      actual = t.split(input: input, range: '2-10')
+
+      # Then
+      expect(File.exist?(actual)).to be true
+      expect(t.page_count(actual)).to eq 9
     end
   end
 
