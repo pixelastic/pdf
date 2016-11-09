@@ -83,7 +83,7 @@ describe(PdfHelper) do
       input = copy(blog)
 
       # When
-      actual = t.split(input: input, page: 3)
+      actual = t.split(input: input, range: 3)
 
       # Then
       expect(File.exist?(actual)).to be true
@@ -95,7 +95,7 @@ describe(PdfHelper) do
       output = File.join(File.dirname(input), 'output.pdf')
 
       # When
-      actual = t.split(input: input, output: output, page: 3)
+      actual = t.split(input: input, output: output, range: 3)
 
       # Then
       expect(actual).to eq output
@@ -109,7 +109,7 @@ describe(PdfHelper) do
       output = File.join(File.dirname(input), 'output.pdf')
 
       # When
-      actual = t.split(input: input, output: 'output.pdf', page: 99_999)
+      actual = t.split(input: input, output: 'output.pdf', range: 99_999)
 
       # Then
       expect(actual).to eq nil

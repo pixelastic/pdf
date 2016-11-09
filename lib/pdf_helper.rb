@@ -36,13 +36,12 @@ module PdfHelper
   end
 
   # Extract a specific page or range from one PDF
-  def split(input: nil, output: nil, page: nil, range: nil)
-    page = range unless range.nil?
-    output = input.gsub(/\.pdf$/, "_#{page}.pdf") if output.nil?
+  def split(input: nil, output: nil, range: nil)
+    output = input.gsub(/\.pdf$/, "_#{range}.pdf") if output.nil?
 
     options = [
       input.shellescape,
-      "cat #{page}",
+      "cat #{range}",
       "output #{output.shellescape}"
     ]
     command = "pdftk #{options.join(' ')}"

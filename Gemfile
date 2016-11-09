@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'awesome_print', '~> 1.6'
+gem 'ruby-progressbar', '~> 1.8.1'
 
 group :development do
   gem 'guard-rspec', '~> 4.6'
