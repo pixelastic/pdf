@@ -77,4 +77,40 @@ describe(PdfHelper) do
     end
   end
 
+  describe 'split' do
+    it 'should extract the specified page' do
+      # Given
+      input = copy(blog)
+
+      # When
+      actual = t.split(input: input, page: 3)
+
+      # Then
+      expect(File.exist?(actual)).to be true
+      expect(t.page_count(actual)).to eq 1
+    end
+    it 'should extract the specified page with the specified name' do
+      # Given
+      input = copy(blog)
+      output = File.join(File.dirname(input), 'output.pdf')
+
+      # When
+      actual = t.split(input: input, output: output, page: 3)
+
+      # Then
+      expect(actual).to eq output
+      expect(File.exist?(actual)).to be true
+      expect(t.page_count(actual)).to eq 1
+    end
+
+    xit 'should do nothing if the page is out of bounds' do
+    end
+
+    xit 'should extract a new pdf of the range defined' do
+    end
+
+    xit 'should not fail when an out-of-bound range is defined' do
+    end
+  end
+
 end
