@@ -23,7 +23,7 @@ flog_lines.each_with_index do |line, index|
   }
 end
 
-exit 0 if errors.zero?
+exit 0 if errors.size.zero?
 
 puts 'Flog test failed:'
 errors.sort_by { |a| a[:score] }.each do |error|
