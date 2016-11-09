@@ -13,7 +13,7 @@ module CommandHelper
   # Returns what is output on stdout
   def command_stdout(command)
     return '' if command.empty?
-    stdout, _ = Open3.capture3(command)
+    stdout, = Open3.capture3(command)
     stdout.strip
   end
 end

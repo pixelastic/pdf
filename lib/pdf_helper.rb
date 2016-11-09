@@ -25,7 +25,7 @@ module PdfHelper
     command = "file #{input.shellescape}"
     result = command_stdout(command)
     _, type = result.chomp.split(':')
-    !!(type =~ /PDF Document/i)
+    !(type =~ /PDF Document/i).nil?
   end
 
   # Return the number of pages of the PDF
@@ -38,9 +38,7 @@ module PdfHelper
   # Extract a specific page or range from one PDF
   def split(input: nil, output: nil, page: nil, range: nil)
     page = range unless range.nil?
-    if output.nil?
-      output = input.gsub(/\.pdf$/, "_#{page}.pdf")
-    end
+    output = input.gsub(/\.pdf$/, "_#{page}.pdf") if output.nil?
 
     options = [
       input.shellescape,
@@ -52,5 +50,4 @@ module PdfHelper
     success = command_success?(command)
     return output if success
   end
-
 end

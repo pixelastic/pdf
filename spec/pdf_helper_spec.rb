@@ -109,7 +109,7 @@ describe(PdfHelper) do
       output = File.join(File.dirname(input), 'output.pdf')
 
       # When
-      actual = t.split(input: input, output: 'output.pdf', page: 99999)
+      actual = t.split(input: input, output: 'output.pdf', page: 99_999)
 
       # Then
       expect(actual).to eq nil
@@ -128,5 +128,4 @@ describe(PdfHelper) do
       expect(t.page_count(actual)).to eq 9
     end
   end
-
 end
