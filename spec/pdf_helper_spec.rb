@@ -3,6 +3,7 @@ require 'spec_helper'
 describe(PdfHelper) do
   let(:t) { Class.new { include PdfHelper }.new }
   let(:blog) { fixture('blog.pdf') }
+  let(:page3) { fixture('blog_3.pdf') }
   let(:jpg) { fixture('image.jpg') }
 
   describe 'info' do
@@ -126,6 +127,19 @@ describe(PdfHelper) do
       # Then
       expect(File.exist?(actual)).to be true
       expect(t.page_count(actual)).to eq 9
+    end
+  end
+
+  describe 'text' do
+    it 'should return the text contained in a pdf' do
+      # Given
+      input = page3
+
+      # When
+      actual = t.text(input)
+
+      # Then
+      expect(actual).to include 'bullshit'
     end
   end
 end

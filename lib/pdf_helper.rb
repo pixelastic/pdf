@@ -49,4 +49,10 @@ module PdfHelper
     success = command_success?(command)
     return output if success
   end
+
+  # Return the text contained in the PDF
+  def text(input)
+    command = "pdftotext #{input.shellescape} -"
+    command_stdout(command)
+  end
 end
