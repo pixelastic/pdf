@@ -55,4 +55,24 @@ module PdfHelper
     command = "pdftotext #{input.shellescape} -"
     command_stdout(command)
   end
+
+  # Extract internal images
+  def images(input)
+    # Create subdir to extract pictures
+    basename = File.basename(input, File.extname(input))
+    dirname = File.dirname(input)
+    dirpath = File.join(dirname, basename)
+    FileUtils.mkdir_p(dirpath)
+
+    options = [
+      '-png',
+      input.shellescape,
+      "#{dirpath.shellescape}/image"
+    ]
+    command = "pdfimages #{options.join(' ')}"
+    success = command_success?(command)
+    return nil unless success
+
+    Dir["#{dirpath}/*.png"]
+  end
 end

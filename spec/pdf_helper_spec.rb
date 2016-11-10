@@ -4,6 +4,7 @@ describe(PdfHelper) do
   let(:t) { Class.new { include PdfHelper }.new }
   let(:blog) { fixture('blog.pdf') }
   let(:page3) { fixture('blog_3.pdf') }
+  let(:blog_image) { fixture('blog_image.pdf') }
   let(:jpg) { fixture('image.jpg') }
 
   describe 'info' do
@@ -140,6 +141,33 @@ describe(PdfHelper) do
 
       # Then
       expect(actual).to include 'bullshit'
+    end
+  end
+
+  describe 'images' do
+    it 'should create a subdirectory to extract pictures' do
+      # Given
+      input = copy(blog_image)
+      dirpath = input.gsub(/\.pdf$/, '/')
+
+      # When
+      t.images(input)
+
+      # Then
+      expect(File.exist?(dirpath)).to be true
+      expect(File.directory?(dirpath)).to be true
+    end
+    it 'should return an array of extracted pictures' do
+      # Given
+      input = copy(blog_image)
+
+      # When
+      actual = t.images(input)
+
+      # Then
+      expect(actual).to be_a Array
+      expect(File.exist?(actual[0])).to be true
+      expect(File.extname(actual[0])).to eq '.png'
     end
   end
 end
