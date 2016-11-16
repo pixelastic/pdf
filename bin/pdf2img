@@ -23,7 +23,7 @@ class Pdf2Img
   end
 
   def pages(pdf)
-    `pdf-pages #{pdf.shellescape}`.strip.to_i
+    `pdf-page-count #{pdf.shellescape}`.strip.to_i
   end
 
   def flatten_pages(pdf)
