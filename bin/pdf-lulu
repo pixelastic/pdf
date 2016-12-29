@@ -37,7 +37,7 @@ class PdfLulu
   end
 
   def page_count
-    `pdf-pages #{@input.shellescape}`.strip.to_i
+    `pdf-page-count #{@input.shellescape}`.strip.to_i
   end
 
   # Split a pdf from `from` to `to`
