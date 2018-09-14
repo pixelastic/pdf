@@ -3,4 +3,5 @@
 java \
   -jar ~/local/src/tika/tika.jar \
   --text-main \
-  "$1"
+  "$1" \
+  2>/dev/null
